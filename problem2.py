@@ -6,5 +6,3 @@ def mean():
     raw = infile.readlines(20)
     infile.close()
     print(raw)
-
-mean()

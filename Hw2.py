@@ -36,5 +36,5 @@ def stemandleaf():
         print('Thanks, Come Again')
     return
 
-if '__name__' == '__main__':
-    stemandleaf()
+
+stemandleaf()

@@ -1,10 +1,26 @@
 import statistics
+from pathlib import Path
 
 def mean():
     cat = input('Pick a category: ')
-    infile = open('../data/'avocado.csv', 'r')
-    raw = infile.readlines(20)
+    folder = Path('data/')
+    file = folder / 'avocado.csv'
+    infile = open(file, 'r')
+    raw = infile.read(5000)
     infile.close()
-    print(raw)
+    rawLst = raw.split(',')
+
+    strVolLst = []
+    count = 3
+    while count < 100:
+        strVolLst.append(rawLst[count])
+        count += 13
+
+    numVolLst = []
+    count2 = 1
+    while count2 < len(strVolLst):
+        numVolLst.append(float(strVolLst[count2]))
+        count += 1
+    print(numVolLst)
 
 mean()

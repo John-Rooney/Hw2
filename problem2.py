@@ -9,7 +9,6 @@ def makeLst():
     raw = infile.read()
     infile.close()
     rawLst = raw.split(',')
-    print(raw[:2000])
     return rawLst
 
 def strLst():
@@ -81,14 +80,23 @@ def readAndComputeMedian_HG():
     else:
         midValue = int((len(lst) - 1) / 2)
         median_HG = lst[midValue]
-        print(median_HG)
         return median_HG
 
 def readAndComputeMean_MML():
     folder = Path('data/')
     file = folder / 'avocados.csv'
+    cat = input('Pick a category: ')
+    dict = {'Average Price': 2, 'Total Volume': 3, 'Total Bags': 7, 'Small Bags': 8, 'Large Bags': 9, 'XLarge Bags': 10}
+
+    n = 0
+    total = 0
     infile = open(file, 'r')
     for i in infile:
-        print(i)
+        strLine = i.split(',')[1:]
+        intLine = []
+        for i in strLine:
+            intLine.append(float(i))
+        total += intLine[dict]
+    print(total)
 
 readAndComputeMean_MML()

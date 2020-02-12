@@ -87,16 +87,19 @@ def readAndComputeMean_MML():
     file = folder / 'avocados.csv'
     cat = input('Pick a category: ')
     dict = {'Average Price': 2, 'Total Volume': 3, 'Total Bags': 7, 'Small Bags': 8, 'Large Bags': 9, 'XLarge Bags': 10}
-
     n = 0
     total = 0
     infile = open(file, 'r')
     for i in infile:
-        strLine = i.split(',')[1:]
-        intLine = []
-        for i in strLine:
-            intLine.append(float(i))
-        total += intLine[dict]
-    print(total)
+        raw = i.split(',')
+        strNum = raw[dict[cat]]
+        try:
+            num = float(strNum)
+            total += num
+            n += 1
+        except:
+            continue
+    mean_MML = round(total/n, 2)
+    return mean_MML
 
 readAndComputeMean_MML()

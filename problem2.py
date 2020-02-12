@@ -57,8 +57,6 @@ def readAndComputeMean_HG():
     mean_HG = round((total / n), 2)
     return lst, mean_HG
 
-#readAndComputeMean_HG()
-
 def readAndComputeSD_HG():
     """Returns sample standard deviation without using statistics module"""
     lst, mean_HG = readAndComputeMean_HG()
@@ -68,4 +66,20 @@ def readAndComputeSD_HG():
         tempSum += (i - mean_HG)**2
     sd_HG = round(((tempSum / n)**0.5), 2)
     return sd_HG
+
+def readAndComputeMedian_HG():
+    """Returns median without using statistics module"""
+    lst = sorted(intLst())
+    # if len(lst) is even
+    if len(lst) % 2 == 0:
+        cut = int(len(lst) / 2)
+        midValues = lst[cut-1:-(cut-1)]
+        median_HG = sum(midValues)/2
+        return median_HG
+    # if len(lst) is odd
+    else:
+        midValue = int((len(lst) - 1) / 2)
+        median_HG = lst[midValue]
+        print(median_HG)
+        return median_HG
 

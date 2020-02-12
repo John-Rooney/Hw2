@@ -34,15 +34,38 @@ def intLst():
 def readAndComputeMean_SM():
     """Computes mean of selected variable in avocado.csv"""
     numVolLst = intLst()
-    return round(statistics.mean(numVolLst), 2)
+    mean_SM = round(statistics.mean(numVolLst), 2)
+    return mean_SM
 
 def readAndComputeSD_SM():
-    """Computes standard deviation of selected variable in avocado.csv"""
+    """Computes sample standard deviation of selected variable in avocado.csv"""
     numVolLst = intLst()
-    return round(statistics.stdev(numVolLst), 2)
-
+    sd_SM = round(statistics.stdev(numVolLst), 2)
+    return sd_SM
 
 def readAndComputeMedian_SM():
     """Computes median of selected variable in avocado.csv"""
     numVolLst = intLst()
-    return round(statistics.median(numVolLst), 2)
+    median_SM = round(statistics.median(numVolLst), 2)
+    return median_SM
+
+def readAndComputeMean_HG():
+    """Returns mean without using statistics module"""
+    lst = intLst()
+    total = sum(lst)
+    n = len(lst)
+    mean_HG = round((total / n), 2)
+    return lst, mean_HG
+
+#readAndComputeMean_HG()
+
+def readAndComputeSD_HG():
+    """Returns sample standard deviation without using statistics module"""
+    lst, mean_HG = readAndComputeMean_HG()
+    n = len(lst) - 1
+    tempSum = 0
+    for i in lst:
+        tempSum += (i - mean_HG)**2
+    sd_HG = round(((tempSum / n)**0.5), 2)
+    return sd_HG
+

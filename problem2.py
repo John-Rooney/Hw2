@@ -152,7 +152,7 @@ def readAndComputeMedian_MML(cat):
         else:
             count += 1
 
-    print(median_MML)
+    #print(median_MML)
     return -1
 #readAndComputeMedian_MML('Total Volume')
 
@@ -165,5 +165,3 @@ def test(cat):
     print()
     print('Median for 3 Functions')
     print('SM: {}  HG: {}  MML: {}'.format(readAndComputeMedian_SM(cat), readAndComputeMedian_HG(cat), readAndComputeMedian_MML(cat)))
-
-test('Total Volume')

@@ -9,6 +9,7 @@ def makeLst():
     raw = infile.read()
     infile.close()
     rawLst = raw.split(',')
+    infile.close()
     return rawLst
 
 def strLst(cat):
@@ -98,6 +99,7 @@ def readAndComputeMean_MML(cat):
             n += 1
         except:
             continue
+    infile.close()
     mean_MML = round(total/n, 2)
     return mean_MML
 
@@ -119,7 +121,33 @@ def readAndComputeSD_MML(cat):
             n += 1
         except:
             continue
+    infile.close()
     sd_MML = round((total / (n - 1)) ** 0.5, 2)
     return sd_MML
 
 def readAndComputeMedian_MML(cat):
+    """Returns median of given category only holding one value in memory at a time"""
+    folder = Path('data/')
+    file = folder / 'avocados.csv'
+    offset = {'Average Price': 2, 'Total Volume': 3, 'Total Bags': 7, 'Small Bags': 8, 'Large Bags': 9, 'XLarge Bags': 10}
+    n = -1
+    infile = open(file, 'r')
+    srtLst = []
+    for i in infile:
+        n += 1
+
+    infile.close()
+    infile = open(file, 'r')
+    midValue = int(n - 1) / 2
+    count = -1
+    for i in infile:
+        if count == midValue:
+            raw = i.split(',')
+            strNum = raw[offset[cat]]
+            median_MML = float(strNum)
+            count += 1
+        else:
+            count += 1
+
+    print(median_MML)
+readAndComputeMedian_MML('Total Volume')

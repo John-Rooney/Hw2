@@ -24,16 +24,16 @@ def game():
                     yorn = input('Double or nothing? Y/N: ')
                 else:
                     if yorn.lower() == 'yes' or yorn.lower() == 'y':
-                        bet *= 2
                         c = random.randrange(1, 7)
                         if score + c == 7 or score + c == 12:
                             balance += bet * 3
                             print(a, b, c, balance, bet)
                         else:
-                            balance -= bet
+                            balance -= bet * 2
                             print(a, b, c, balance, bet)
                     else:
                         balance -= bet
-                        print(a, b, balance, bet)
-
+                        print(balance, bet)
+    else:
+        print('You lost all your money :(')
 game()

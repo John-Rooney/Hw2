@@ -57,11 +57,12 @@ def readAndComputeMean_HG(cat):
     total = sum(lst)
     n = len(lst)
     mean_HG = round((total / n), 2)
-    return lst, mean_HG
+    return mean_HG
 
 def readAndComputeSD_HG(cat):
     """Returns sample standard deviation without using statistics module"""
-    lst, mean_HG = readAndComputeMean_HG(cat)
+    lst = intLst(cat)
+    mean_HG = readAndComputeMean_HG(cat)
     n = len(lst) - 1
     tempSum = 0
     for i in lst:
@@ -152,5 +153,17 @@ def readAndComputeMedian_MML(cat):
             count += 1
 
     print(median_MML)
+    return -1
 #readAndComputeMedian_MML('Total Volume')
 
+def test(cat):
+    print('Mean for 3 Functions')
+    print('SM: {}  HG: {}  MML: {}'.format(readAndComputeMean_SM(cat), readAndComputeMean_HG(cat), readAndComputeMean_MML(cat)))
+    print()
+    print('Standard Deviation for 3 Functions')
+    print('SM: {}  HG: {}  MML: {}'.format(readAndComputeSD_SM(cat), readAndComputeSD_HG(cat), readAndComputeSD_MML(cat)))
+    print()
+    print('Median for 3 Functions')
+    print('SM: {}  HG: {}  MML: {}'.format(readAndComputeMedian_SM(cat), readAndComputeMedian_HG(cat), readAndComputeMedian_MML(cat)))
+
+test('Total Volume')

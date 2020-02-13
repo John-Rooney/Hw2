@@ -14,7 +14,7 @@ def makeLst():
 
 def strLst(cat):
     """Creates list of str numbers for given variable"""
-    dict = {'Average Price': 2, 'Total Volume': 3, 'Total Bags': 7, 'Small Bags': 8, 'Large Bags': 9, 'XLarge Bags': 10}
+    dict = {'Average Price': 2, 'Total Volume': 3, '4046': 4, '4225': 5, '4770': 6, 'Total Bags': 7, 'Small Bags': 8, 'Large Bags': 9, 'XLarge Bags': 10}
     rawLst = makeLst()
     strVolLst = []
     offset = dict[cat]
@@ -36,6 +36,8 @@ def readAndComputeMean_SM(cat):
     numVolLst = intLst(cat)
     mean_SM = round(statistics.mean(numVolLst), 2)
     return mean_SM
+
+readAndComputeMean_SM('4046')
 
 def readAndComputeSD_SM(cat):
     """Computes sample standard deviation of selected variable in avocado.csv"""
@@ -86,7 +88,7 @@ def readAndComputeMean_MML(cat):
     """Returns mean of given category only holding one value in memory at a time"""
     folder = Path('data/')
     file = folder / 'avocado.csv'
-    offset = {'Average Price': 2, 'Total Volume': 3, 'Total Bags': 7, 'Small Bags': 8, 'Large Bags': 9, 'XLarge Bags': 10}
+    offset = {'Average Price': 2, 'Total Volume': 3, '4046': 4, '4225': 5, '4770': 6, 'Total Bags': 7, 'Small Bags': 8, 'Large Bags': 9, 'XLarge Bags': 10}
     n = 0
     total = 0
     infile = open(file, 'r')
@@ -107,7 +109,7 @@ def readAndComputeSD_MML(cat):
     """Returns sample standard deviation of given category only holding one value in memory at a time"""
     folder = Path('data/')
     file = folder / 'avocado.csv'
-    offset = {'Average Price': 2, 'Total Volume': 3, 'Total Bags': 7, 'Small Bags': 8, 'Large Bags': 9, 'XLarge Bags': 10}
+    offset = {'Average Price': 2, 'Total Volume': 3, '4046': 4, '4225': 5, '4770': 6, 'Total Bags': 7, 'Small Bags': 8, 'Large Bags': 9, 'XLarge Bags': 10}
     mean = readAndComputeMean_MML(cat)
     n = 0
     total = 0
@@ -129,7 +131,7 @@ def readAndComputeMedian_MML(cat):
     """Returns median of given category only holding one value in memory at a time"""
     folder = Path('data/')
     file = folder / 'avocados.csv'
-    offset = {'Average Price': 2, 'Total Volume': 3, 'Total Bags': 7, 'Small Bags': 8, 'Large Bags': 9, 'XLarge Bags': 10}
+    offset = {'Average Price': 2, 'Total Volume': 3, '4046': 4, '4225': 5, '4770': 6, 'Total Bags': 7, 'Small Bags': 8, 'Large Bags': 9, 'XLarge Bags': 10}
     n = -1
     infile = open(file, 'r')
     srtLst = []
@@ -150,4 +152,5 @@ def readAndComputeMedian_MML(cat):
             count += 1
 
     print(median_MML)
-readAndComputeMedian_MML('Total Volume')
+#readAndComputeMedian_MML('Total Volume')
+

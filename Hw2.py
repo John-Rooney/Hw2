@@ -28,9 +28,11 @@ def stemandleaf():
             else:
                 nums[i[:-1]] += i[-1] + ' '
 
-        print('Stem and Leaf Plot')
+        print()
+        print('Stem and Leaf Plot ' + num)
         for i in nums:
             print('{:3}| {}'.format(i, nums[i]))
+        print()
         num = input('Select 1, 2, or 3: ')
     else:
         print('Thanks, Come Again')

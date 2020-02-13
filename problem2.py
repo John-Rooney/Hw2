@@ -11,9 +11,8 @@ def makeLst():
     rawLst = raw.split(',')
     return rawLst
 
-def strLst():
+def strLst(cat):
     """Creates list of str numbers for given variable"""
-    cat = input('Pick a category: ')
     dict = {'Average Price': 2, 'Total Volume': 3, 'Total Bags': 7, 'Small Bags': 8, 'Large Bags': 9, 'XLarge Bags': 10}
     rawLst = makeLst()
     strVolLst = []
@@ -23,43 +22,43 @@ def strLst():
         offset += 13
     return strVolLst
 
-def intLst():
+def intLst(cat):
     """Creates list of int numbers for given variable"""
-    strVolLst = strLst()
+    strVolLst = strLst(cat)
     numVolLst = []
     for i in range(1, len(strVolLst)):
         numVolLst.append(float(strVolLst[i]))
     return numVolLst
 
-def readAndComputeMean_SM():
+def readAndComputeMean_SM(cat):
     """Computes mean of selected variable in avocado.csv"""
-    numVolLst = intLst()
+    numVolLst = intLst(cat)
     mean_SM = round(statistics.mean(numVolLst), 2)
     return mean_SM
 
-def readAndComputeSD_SM():
+def readAndComputeSD_SM(cat):
     """Computes sample standard deviation of selected variable in avocado.csv"""
-    numVolLst = intLst()
+    numVolLst = intLst(cat)
     sd_SM = round(statistics.stdev(numVolLst), 2)
     return sd_SM
 
-def readAndComputeMedian_SM():
+def readAndComputeMedian_SM(cat):
     """Computes median of selected variable in avocado.csv"""
-    numVolLst = intLst()
+    numVolLst = intLst(cat)
     median_SM = round(statistics.median(numVolLst), 2)
     return median_SM
 
-def readAndComputeMean_HG():
+def readAndComputeMean_HG(cat):
     """Returns mean without using statistics module"""
-    lst = intLst()
+    lst = intLst(cat)
     total = sum(lst)
     n = len(lst)
     mean_HG = round((total / n), 2)
     return lst, mean_HG
 
-def readAndComputeSD_HG():
+def readAndComputeSD_HG(cat):
     """Returns sample standard deviation without using statistics module"""
-    lst, mean_HG = readAndComputeMean_HG()
+    lst, mean_HG = readAndComputeMean_HG(cat)
     n = len(lst) - 1
     tempSum = 0
     for i in lst:
@@ -67,9 +66,9 @@ def readAndComputeSD_HG():
     sd_HG = round(((tempSum / n)**0.5), 2)
     return sd_HG
 
-def readAndComputeMedian_HG():
+def readAndComputeMedian_HG(cat):
     """Returns median without using statistics module"""
-    lst = sorted(intLst())
+    lst = sorted(intLst(cat))
     # if len(lst) is even
     if len(lst) % 2 == 0:
         cut = int(len(lst) / 2)
@@ -82,17 +81,17 @@ def readAndComputeMedian_HG():
         median_HG = lst[midValue]
         return median_HG
 
-def readAndComputeMean_MML():
+def readAndComputeMean_MML(cat):
+    """Returns mean of given category only holding one value in memory at a time"""
     folder = Path('data/')
-    file = folder / 'avocados.csv'
-    cat = input('Pick a category: ')
-    dict = {'Average Price': 2, 'Total Volume': 3, 'Total Bags': 7, 'Small Bags': 8, 'Large Bags': 9, 'XLarge Bags': 10}
+    file = folder / 'avocado.csv'
+    offset = {'Average Price': 2, 'Total Volume': 3, 'Total Bags': 7, 'Small Bags': 8, 'Large Bags': 9, 'XLarge Bags': 10}
     n = 0
     total = 0
     infile = open(file, 'r')
     for i in infile:
         raw = i.split(',')
-        strNum = raw[dict[cat]]
+        strNum = raw[offset[cat]]
         try:
             num = float(strNum)
             total += num
@@ -102,4 +101,25 @@ def readAndComputeMean_MML():
     mean_MML = round(total/n, 2)
     return mean_MML
 
-readAndComputeMean_MML()
+def readAndComputeSD_MML(cat):
+    """Returns sample standard deviation of given category only holding one value in memory at a time"""
+    folder = Path('data/')
+    file = folder / 'avocado.csv'
+    offset = {'Average Price': 2, 'Total Volume': 3, 'Total Bags': 7, 'Small Bags': 8, 'Large Bags': 9, 'XLarge Bags': 10}
+    mean = readAndComputeMean_MML(cat)
+    n = 0
+    total = 0
+    infile = open(file, 'r')
+    for i in infile:
+        raw = i.split(',')
+        strNum = raw[offset[cat]]
+        try:
+            num = float(strNum)
+            total += (num - mean)**2
+            n += 1
+        except:
+            continue
+    sd_MML = round((total / (n - 1)) ** 0.5, 2)
+    return sd_MML
+
+def readAndComputeMedian_MML(cat):

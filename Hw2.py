@@ -1,5 +1,5 @@
 
-def stemandleaf():
+def stemAndLeaf():
     '''Prints stem and leaf plot from .txt file'''
     print('Hello!')
     num = str(input('Select 1, 2, or 3: '))
@@ -39,4 +39,5 @@ def stemandleaf():
     return
 
 
-stemandleaf()
+if __name__ == '__main__':
+    stemAndLeaf()

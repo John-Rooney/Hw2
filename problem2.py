@@ -1,6 +1,7 @@
 import statistics
 from pathlib import Path
 
+
 def makeLst():
     """Makes list of values out of avocado.csv"""
     folder = Path('data/')
@@ -11,6 +12,7 @@ def makeLst():
     rawLst = raw.split(',')
     infile.close()
     return rawLst
+
 
 def strLst(cat):
     """Creates list of str numbers for given variable"""
@@ -23,6 +25,7 @@ def strLst(cat):
         offset += 13
     return strVolLst
 
+
 def intLst(cat):
     """Creates list of int numbers for given variable"""
     strVolLst = strLst(cat)
@@ -31,13 +34,13 @@ def intLst(cat):
         numVolLst.append(float(strVolLst[i]))
     return numVolLst
 
+
 def readAndComputeMean_SM(cat):
     """Computes mean of selected variable in avocado.csv"""
     numVolLst = intLst(cat)
     mean_SM = round(statistics.mean(numVolLst), 2)
     return mean_SM
 
-readAndComputeMean_SM('4046')
 
 def readAndComputeSD_SM(cat):
     """Computes sample standard deviation of selected variable in avocado.csv"""
@@ -45,11 +48,13 @@ def readAndComputeSD_SM(cat):
     sd_SM = round(statistics.stdev(numVolLst), 2)
     return sd_SM
 
+
 def readAndComputeMedian_SM(cat):
     """Computes median of selected variable in avocado.csv"""
     numVolLst = intLst(cat)
     median_SM = round(statistics.median(numVolLst), 2)
     return median_SM
+
 
 def readAndComputeMean_HG(cat):
     """Returns mean without using statistics module"""
@@ -58,6 +63,7 @@ def readAndComputeMean_HG(cat):
     n = len(lst)
     mean_HG = round((total / n), 2)
     return mean_HG
+
 
 def readAndComputeSD_HG(cat):
     """Returns sample standard deviation without using statistics module"""
@@ -69,6 +75,7 @@ def readAndComputeSD_HG(cat):
         tempSum += (i - mean_HG)**2
     sd_HG = round(((tempSum / n)**0.5), 2)
     return sd_HG
+
 
 def readAndComputeMedian_HG(cat):
     """Returns median without using statistics module"""
@@ -84,6 +91,7 @@ def readAndComputeMedian_HG(cat):
         midValue = int((len(lst) - 1) / 2)
         median_HG = lst[midValue]
         return median_HG
+
 
 def readAndComputeMean_MML(cat):
     """Returns mean of given category only holding one value in memory at a time"""
@@ -105,6 +113,7 @@ def readAndComputeMean_MML(cat):
     infile.close()
     mean_MML = round(total/n, 2)
     return mean_MML
+
 
 def readAndComputeSD_MML(cat):
     """Returns sample standard deviation of given category only holding one value in memory at a time"""
@@ -128,33 +137,44 @@ def readAndComputeSD_MML(cat):
     sd_MML = round((total / (n - 1)) ** 0.5, 2)
     return sd_MML
 
+
 def readAndComputeMedian_MML(cat):
     """Returns median of given category only holding one value in memory at a time"""
     folder = Path('data/')
     file = folder / 'avocados.csv'
     offset = {'Average Price': 2, 'Total Volume': 3, '4046': 4, '4225': 5, '4770': 6, 'Total Bags': 7, 'Small Bags': 8, 'Large Bags': 9, 'XLarge Bags': 10}
-    n = -1
+    n = 0
     infile = open(file, 'r')
-    srtLst = []
     for i in infile:
         n += 1
-
     infile.close()
-    infile = open(file, 'r')
-    midValue = int(n - 1) / 2
-    count = -1
-    for i in infile:
-        if count == midValue:
-            raw = i.split(',')
-            strNum = raw[offset[cat]]
-            median_MML = float(strNum)
-            count += 1
-        else:
-            count += 1
+    half = int((n - 2) / 2)
 
-    #print(median_MML)
+    higher = 0
+    lower = 0
+
+    infile = open(file, 'r')
+    while higher < 13:
+        line = infile.readline()
+        raw = line.split(',')
+        #strNum = raw[offset[cat]]
+        try:
+            num = float(strNum)
+            for i in infile:
+                raw2 = i.split(',')
+                strNum2 = raw2[offset[cat]]
+                if num > float(strNum2):
+                    higher += 1
+                    #print('higher ', higher)
+                else:
+                    lower += 1
+                    #print('lower ', lower)
+        except:
+            #print('continue')
+            continue
+    else:
+        print('bottom')
     return -1
-#readAndComputeMedian_MML('Total Volume')
 
 def test(cat):
     print('Mean for 3 Functions')
@@ -165,3 +185,17 @@ def test(cat):
     print()
     print('Median for 3 Functions')
     print('SM: {}  HG: {}  MML: {}'.format(readAndComputeMedian_SM(cat), readAndComputeMedian_HG(cat), readAndComputeMedian_MML(cat)))
+test('Small Bags')
+
+
+if '__name__' == '__main__':
+    readAndComputeMean_HG(cat)
+    readAndComputeMean_SM(cat)
+    readAndComputeMean_MML(cat)
+    readAndComputeSD_HG(cat)
+    readAndComputeSD_SM(cat)
+    readAndComputeSD_MML(cat)
+    readAndComputeMedian_HG(cat)
+    readAndComputeMedian_MML(cat)
+    readAndComputeMedian_SM(cat)
+    test(cat)

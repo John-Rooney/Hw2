@@ -49,4 +49,5 @@ def game():
         print('You lost all your money :(')
     return
 
-game()
+if __name__ == '__main__':
+    game()

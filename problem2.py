@@ -141,7 +141,7 @@ def readAndComputeSD_MML(cat):
 def readAndComputeMedian_MML(cat):
     """Returns median of given category only holding one value in memory at a time"""
     folder = Path('data/')
-    file = folder / 'avocados.csv'
+    file = folder / 'avocado.csv'
     offset = {'Average Price': 2, 'Total Volume': 3, '4046': 4, '4225': 5, '4770': 6, 'Total Bags': 7, 'Small Bags': 8, 'Large Bags': 9, 'XLarge Bags': 10}
     n = 0
     infile = open(file, 'r')
@@ -154,7 +154,7 @@ def readAndComputeMedian_MML(cat):
     lower = 0
 
     infile = open(file, 'r')
-    while higher < 13:
+    for i in infile:
         line = infile.readline()
         raw = line.split(',')
         #strNum = raw[offset[cat]]
@@ -173,7 +173,7 @@ def readAndComputeMedian_MML(cat):
             #print('continue')
             continue
     else:
-        print('bottom')
+        print()
     return -1
 
 def test(cat):
@@ -185,7 +185,6 @@ def test(cat):
     print()
     print('Median for 3 Functions')
     print('SM: {}  HG: {}  MML: {}'.format(readAndComputeMedian_SM(cat), readAndComputeMedian_HG(cat), readAndComputeMedian_MML(cat)))
-test('Small Bags')
 
 
 if '__name__' == '__main__':

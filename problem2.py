@@ -174,7 +174,7 @@ def readAndComputeMedian_MML(cat):
             #print('continue')
             continue
     else:
-        print()
+        pass
     return median_MML
 
 def test(cat):
@@ -189,13 +189,13 @@ def test(cat):
 
 
 if '__name__' == '__main__':
-    readAndComputeMean_HG(cat)
-    readAndComputeMean_SM(cat)
-    readAndComputeMean_MML(cat)
-    readAndComputeSD_HG(cat)
-    readAndComputeSD_SM(cat)
-    readAndComputeSD_MML(cat)
-    readAndComputeMedian_HG(cat)
-    readAndComputeMedian_MML(cat)
-    readAndComputeMedian_SM(cat)
-    test(cat)
+    readAndComputeMean_HG()
+    readAndComputeMean_SM()
+    readAndComputeMean_MML()
+    readAndComputeSD_HG()
+    readAndComputeSD_SM()
+    readAndComputeSD_MML()
+    readAndComputeMedian_HG()
+    readAndComputeMedian_MML()
+    readAndComputeMedian_SM()
+    test()
